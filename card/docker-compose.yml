@@ -1,0 +1,15 @@
+services:
+  card:
+    image: "vikramb33/cards:0.0.1"
+    container_name: cards_ms
+    ports:
+      - "9000:9000"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - banknetwork
+networks:
+  banknetwork:
+    driver: "bridge"
