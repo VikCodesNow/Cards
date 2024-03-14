@@ -1,6 +1,10 @@
 server:
   port: 9000
+
+
 spring:
+  application:
+    name: cards
   datasource:
     url: jdbc:h2:mem:mydb
     username: sa
@@ -14,7 +18,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  config:
+    import: "optional:configserver:http://localhost:8071/"
 
-cards:
-  env: local
-  version: 0.0.1
