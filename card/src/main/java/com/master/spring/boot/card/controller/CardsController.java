@@ -2,6 +2,7 @@ package com.master.spring.boot.card.controller;
 
 
 import com.master.spring.boot.card.constants.CardsConstants;
+import com.master.spring.boot.card.dto.CardApiDto;
 import com.master.spring.boot.card.dto.CardsDto;
 import com.master.spring.boot.card.dto.ErrorResponseDto;
 import com.master.spring.boot.card.dto.ResponseDto;
@@ -15,6 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +36,9 @@ import org.springframework.web.bind.annotation.*;
 public class CardsController {
 
     private ICardsService iCardsService;
+
+    @Autowired
+    CardApiDto apiDto;
 
     @Operation(
             summary = "Create Card REST API",
@@ -158,6 +163,11 @@ public class CardsController {
                     .status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(CardsConstants.STATUS_417, CardsConstants.MESSAGE_417_DELETE));
         }
+    }
+
+    @GetMapping("api-version")
+    public ResponseEntity<CardApiDto> getVersion() {
+        return new ResponseEntity<>(apiDto,HttpStatus.OK);
     }
 
 }
